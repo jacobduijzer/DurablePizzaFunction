@@ -1,0 +1,51 @@
+GET http://localhost:7071/api/StarterFunction?name=Jacob
+
+###
+
+POST http://localhost:7071/api/StarterFunction
+Content-Type: application/json
+
+{
+    "name": "Jacob"
+}
+
+###
+
+# @name simpleDurableFunction
+GET http://localhost:7071/api/SimpleDurableFunction_HttpStart
+
+###
+
+GET {{simpleDurableFunction.response.body.statusQueryGetUri}}
+
+###
+
+# @name durableFunction
+POST http://localhost:7071/api/NewOrderFunction_HttpStart
+Content-Type: application/json
+
+"+1425XXXXXXX"
+
+###
+
+GET {{durableFunction.response.headers.Location}}
+
+###
+
+GET {{durableFunction.response.body.statusQueryGetUri}}
+
+###
+
+GET {{durableFunction.response.body.sendEventPostUri}}
+
+###
+
+GET {{durableFunction.response.body.terminatePostUri}}
+
+###
+
+GET {{durableFunction.response.body.rewindPostUri}}
+
+###
+
+GET {{durableFunction.response.body.purgeHistoryDeleteUri}}
