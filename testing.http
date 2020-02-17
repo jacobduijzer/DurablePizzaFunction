@@ -24,7 +24,35 @@ GET {{simpleDurableFunction.response.body.statusQueryGetUri}}
 POST http://localhost:7071/api/NewOrderFunction_HttpStart
 Content-Type: application/json
 
-"+1425XXXXXXX"
+{
+   "Id": "426ac7a6-b8f0-4b5b-b947-bbcbf6476420",
+   "CustomerId": "9d499cd9-c220-4630-aaff-9d6d90d575c1",
+   "OrderStatus": 0,
+   "OrderItems":[
+      {
+         "Amount":1,
+         "Pizza":{
+            "Name": "Some Pizza",
+            "Price": 10.0
+         }
+      },
+      {
+         "Amount": 2,
+         "Pizza":{
+            "Name": "Some Other Pizza",
+            "Price": 10.5
+         }
+      }
+   ],
+   "OrderCreated": "2020-02-17T23:57:42.5871+01:00"
+}
+
+###
+
+POST http://localhost:7071/runtime/webhooks/durabletask/instances/{{durableFunction.response.body.id}}/raiseEvent/PaymentReceived?taskHub=DurableFunctionsHub&connection=Storage&code=9gpajMmP8rL3vfjnf6iQSrOyoMv1/0dApn7qmIfhBpWePoMATIcv3g==
+Content-Type: application/json
+
+"426ac7a6-b8f0-4b5b-b947-bbcbf6476420"
 
 ###
 
